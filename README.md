@@ -1,13 +1,82 @@
-## Video Visual Relation Detection Helpler
+# Video Visual Relation Understanding Helpler
 
-This repository contains some helper functions for the convenient usage of
-[ImageNet-VidVRD dataset](https://xdshang.github.io/docs/imagenet-vidvrd.html)
-and [VidOR dataset](https://xdshang.github.io/docs/vidor.html). 
-It also contains scripts for evaluating several relevant tasks, i.e.
-*video object detection* and *video relation detection*.
+This repository is the modified version of [VidVRD-helper](https://github.com/NExTplusplus/VidVRD-helper), which is evaluation code of Video Relation Understanding, ACM Multimedia'21 Grand Challenge.
+We update add a few features to help our students evaluate their own codes of the dataset [VidOR](https://xdshang.github.io/docs/vidor.html#downloads)
 
-Please note that the enclosed *baseline* does not serve as general baseline for
-those tasks. You can ignore it if you are not working with ImageNet-VidVRD dataset.
+## Qucik Start
+### Perequisites
+You are encoraged to use your own virtual environment, e.g., Anaconda or virtualenv, to create a new and clean environment to develop.
+For example, if you use virtualenv in Ubuntu, you need to create the env first:
+```
+python3 -m venv venv
+```
+And activate it:
+```
+source venv/bin/activate
+```
+We already export all the required packages to requirements.txt, just pip install them:
+```
+pip install -r requirements.txt
+```
+
+### Dataset
+After installing the requirements, let's download the [VidOR dataset] (https://xdshang.github.io/docs/vidor.html#downloads) provided by Shang et al.
+The recommand structure after you download all the videos and annotation is like:
+```
+VidVOR-helper
+├── vidor-dataset
+│   ├── annotation
+│   │   ├── training
+│   │   │   ├── 0000
+│   │   │   └── ...
+│   │   └── validation
+│   │   │   ├── 0000
+│   │   │   └── ...
+│   └── video
+│       ├── 0000
+│       ├── 0001
+│       ├── ...
+├── doc
+.
+.
+.
+├── baseline.py
+├── evaluate.py
+└── visualize.py
+```
+Otherwise, you need to change the path in the specified scripts.
+
+## How to run
+### Evaluation
+In this Grand Challenge, you need to generate a JSON file which cotains triplet, trajectory, and some other results. 
+Please follow the submission format. (Find detailed format in [link](https://videorelation.nextcenter.org/mm21-gdc/task1.html))
+You can evaluate all video by:
+```
+python3 evaluate.py [dataset] [split] [task] [prediction_json_annotation]
+```
+However, if you only want to evaluate one specified video without lengthy evaluation, add a flag **-s**
+The following is the sample command:
+```
+python3 evaluate.py vidor validation relation ~/vidvrd-mff/results/vidor_val_spalan.json
+python3 evaluate.py -s vidor validation relation ~/vidvrd-mff/results/vidor_val_spalan/2435633172.json
+```
+Please follow the official [Evaluation Metric](https://videorelation.nextcenter.org/mm21-gdc/task1.html)
+
+### Visualization
+The annotation of individual video is able to visualize the bounding box and relation:
+```
+python3 visualize.py [video_path] [annotation_path] [output_path]
+```
+Take one of the video in training set as example:
+```
+python3 visualize.py ~/VidOR-helper/vidor-dataset/video/ ~/VidOR-helper/vidor-dataset/annotation/training/0000/2401075277.json ~/output
+```
+
+### Top-1 solution in ACM MM'19
+
+
+
+
 
 Please cite the following papers if the datasets help your research:
 ```
