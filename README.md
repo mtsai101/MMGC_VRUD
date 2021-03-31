@@ -46,7 +46,26 @@ VidVOR-helper
 ```
 Otherwise, you need to change the path in the specified scripts.
 
-## How to run
+## Top-1 solution in ACM MM'19
+This is just a sample starting point, you don't need to look into it necessarily. 
+The top-1 solution of VRU'2019 was released at [link](https://zdtnag7mmr.larksuite.com/file/boxusugavBW2RyKEE277UdPROyb), including precomputed features, bounding box trajectories, and source code. 
+Please cite this paper if you want to do this challenge based on their idea.
+
+### How to
+Here we just mention how to testing the pretrained model. Note that you will need to modifiy the feature extraction or re-build your own model. 
+#### Features
+Before testing, please generate the spatial and language feaures first.
+```
+python3 prepare.py
+```
+#### Testing
+While testing, the flag **single_result_file** in vidor_config.yaml indicates the single or individual json files are generated.
+```
+python3 test.py
+```
+You will get ***~/vidvrd-mff/results/vidor_val_spalan.json*** or ***~/vidvrd-mff/results/vidor_val_spalan/XXXXXXX.json*** for the evaluation
+
+## How to run this helper
 ### Evaluation
 In this Grand Challenge, you need to generate a JSON file which cotains triplet, trajectory, and some other results. 
 Please follow the submission format. (Find detailed format in [link](https://videorelation.nextcenter.org/mm21-gdc/task1.html))
@@ -72,23 +91,7 @@ Take one of the video in training set as example:
 python3 visualize.py ~/VidOR-helper/vidor-dataset/video/ ~/VidOR-helper/vidor-dataset/annotation/training/0000/2401075277.json ~/output
 ```
 
-## Top-1 solution in ACM MM'19
-This is just a sample starting point, you don't need to look into it necessarily. 
-The top-1 solution of VRU'2019 was released at [link](https://zdtnag7mmr.larksuite.com/file/boxusugavBW2RyKEE277UdPROyb), including precomputed features, bounding box trajectories, and source code. 
-Please cite this paper if you want to do this challenge based on their idea.
 
-### How to
-Here we just mention how to testing the pretrained model. Note that you will need to modifiy the feature extraction or re-build your own model. 
-#### Features
-Before testing, please generate the spatial and language feaures first.
-```
-python3 prepare.py
-```
-#### Testing
-While testing, the flag **single_result_file** in vidor_config.yaml indicates the single or individual json files are generated.
-```
-python3 test.py
-```
 
 
 Please cite the following papers if the datasets help your research:
